@@ -30,6 +30,13 @@
                                 classroom
                             </x-nav-link>
 
+                            <x-nav-link href="/teacher" :active="request()->is('teacher')">
+                                guru
+                            </x-nav-link>
+                            <x-nav-link href="/subject" :active="request()->is('subject')">
+                                subject
+                            </x-nav-link>
+
                         </div>
                     </div>
                 </div>
