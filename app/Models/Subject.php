@@ -9,6 +9,9 @@ class Subject extends Model
 {
     /** @use HasFactory<\Database\Factories\SubjectFactory> */
     use HasFactory;
+
+    protected $fillable = ['name'];
+
     public function teacher(){
         return $this->hasOne(Teacher::class,'subject_id');
     }
