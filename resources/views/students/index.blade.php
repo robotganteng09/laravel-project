@@ -1,47 +1,93 @@
 <x-admin.layout>
     <div class="p-6">
-        <h1 class="text-2xl font-bold mb-4">Daftar Siswa</h1>
 
-        @if(session('success'))
-            <div class="bg-green-100 text-green-700 p-2 rounded mb-4">
+        {{-- Header Section --}}
+        <div
+            class="flex flex-col md:flex-row items-center justify-between space-y-3
+             md:space-y-0 md:space-x-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm mb-4">
+            <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
+                Daftar Siswa
+            </h1>
+
+            {{-- Tombol Tambah --}}
+            <a href="{{ route('students.create') }}"
+                class="flex items-center justify-center text-white
+               bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300
+               font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-500
+               dark:hover:bg-green-600 focus:outline-none dark:focus:ring-green-800 transition">
+                <svg class="h-4 w-4 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path clip-rule="evenodd" fill-rule="evenodd"
+                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110
+                        2h-5v5a1 1 0 11-2 0v-5H4a1 1 0
+                        110-2h5V4a1 1 0 011-1z" />
+                </svg>
+                Tambah Siswa
+            </a>
+        </div>
+
+        {{-- Alert Success --}}
+        @if (session('success'))
+            <div class="bg-green-100 border border-green-300 text-green-700 px-4 py-2 rounded-lg mb-4 shadow-sm">
                 {{ session('success') }}
             </div>
         @endif
 
-        <a href="{{ route('students.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded mb-3 inline-block">Tambah Siswa</a>
+        {{-- Table Section --}}
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white dark:bg-gray-800">
+            <table class="w-full text-sm text-left text-gray-600 dark:text-gray-300">
+                <thead class="text-xs uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-300">
+                    <tr>
+                        <th class="px-6 py-3 text-center">Nama</th>
+                        <th class="px-6 py-3 text-center">Email</th>
+                        <th class="px-6 py-3 text-center">Kelas</th>
+                        <th class="px-6 py-3 text-center">Alamat</th>
+                        <th class="px-6 py-3 text-center">Tanggal Lahir</th>
+                        <th class="px-6 py-3 text-center">Gender</th>
+                        <th class="px-6 py-3 text-center">Aksi</th>
+                    </tr>
+                </thead>
 
-        <table class="w-full border border-gray-300 mt-3">
-            <thead>
-                <tr class="bg-gray-100">
-                    <th class="border p-2">Nama</th>
-                    <th class="border p-2">Email</th>
-                    <th class="border p-2">Kelas</th>
-                    <th class="border p-2">Alamat</th>
-                    <th class="border p-2">Tanggal Lahir</th>
-                    <th class="border p-2">Gender</th>
-                    <th class="border p-2">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($students as $student)
-                <tr>
-                    <td class="border p-2">{{ $student->name }}</td>
-                    <td class="border p-2">{{ $student->email }}</td>
-                    <td class="border p-2">{{ $student->classroom->name ?? '-' }}</td>
-                    <td class="border p-2">{{ $student->alamat }}</td>
-                    <td class="border p-2">{{ $student->birthday }}</td>
-                    <td class="border p-2">{{ ucfirst($student->gender) }}</td>
-                    <td class="border p-2">
-                        <a href="{{ route('students.edit', $student->id) }}" class="text-blue-500">Edit</a> |
-                        <form action="{{ route('students.destroy', $student->id) }}" method="POST" class="inline">
-                            @csrf
-                            @method('DELETE')
-                            <button class="text-red-500" onclick="return confirm('Yakin ingin hapus data ini?')">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                <tbody>
+                    @foreach ($students as $student)
+                        <tr class="border-t hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                            <td class="px-6 py-4 text-center font-medium text-gray-900 dark:text-white">
+                                {{ $student->name }}
+                            </td>
+                            <td class="px-6 py-4 text-center">{{ $student->email }}</td>
+                            <td class="px-6 py-4 text-center">{{ $student->classroom->name ?? '-' }}</td>
+                            <td class="px-6 py-4 text-center">{{ $student->alamat }}</td>
+                            <td class="px-6 py-4 text-center">{{ $student->birthday }}</td>
+                            <td class="px-6 py-4 text-center">{{ ucfirst($student->gender) }}</td>
+
+                            <td class="px-6 py-4 text-center">
+                                <div class="flex justify-center items-center space-x-2">
+                                    {{-- Tombol Edit --}}
+                                    <a href="{{ route('students.edit', $student->id) }}"
+                                        class="inline-flex items-center bg-blue-500 hover:bg-blue-600
+                                               text-white px-3 py-1 rounded text-xs font-medium shadow-sm transition">
+                                       
+                                        Edit
+                                    </a>
+
+                                    {{-- Tombol Hapus --}}
+                                    <form action="{{ route('students.destroy', $student->id) }}" method="POST"
+                                        onsubmit="return confirm('Yakin ingin hapus data ini?')" class="inline-flex">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="inline-flex items-center bg-red-500 hover:bg-red-600
+                                                   text-white px-3 py-1 rounded text-xs font-medium shadow-sm transition">
+                                          
+                                            Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </x-admin.layout>

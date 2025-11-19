@@ -1,53 +1,61 @@
 <x-admin.layout>
-    <style>
-        
-        table,
-        th,
-        td {
-            border: 2px solid black;
-            padding: 8px;
-            text-align: center;
-        }
-    </style>
-
     <div class="p-6">
-        <h1 class="text-xl font-bold mb-4">Daftar Wali</h1>
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-2xl font-bold">Daftar Wali</h1>
+            <a href="{{ route('guardians.create') }}" 
+               class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow-md flex items-center space-x-1">
+                <span>+ Tambah Wali</span>
+            </a>
+        </div>
 
-        <a href="{{ route('guardians.create') }}" 
-           class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mb-4 inline-block">
-           + Tambah Wali
-        </a>
+        @if(session('success'))
+            <div class="bg-green-100 text-green-700 p-3 rounded mb-4 shadow-sm">
+                {{ session('success') }}
+            </div>
+        @endif
 
-        <table class="w-full">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Pekerjaan</th>
-                    <th>Telepon</th>
-                    <th>Email</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($guardians as $walis)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $walis->name }}</td>
-                    <td>{{ $walis->job }}</td>
-                    <td>{{ $walis->phone }}</td>
-                    <td>{{ $walis->email }}</td>
-                    <td>
-                        <a href="{{ route('guardians.edit', $walis->id) }}" class="text-blue-500">Edit</a> |
-                        <form action="{{ route('guardians.destroy', $walis->id) }}" method="POST" class="inline">
-                            @csrf
-                            @method('DELETE')
-                            <button class="text-red-500" onclick="return confirm('Yakin ingin hapus data ini?')">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr class="bg-gray-100 text-gray-700 text-sm uppercase tracking-wide">
+                        <th class="py-3 px-4 text-left">No</th>
+                        <th class="py-3 px-4 text-left">Nama</th>
+                        <th class="py-3 px-4 text-left">Pekerjaan</th>
+                        <th class="py-3 px-4 text-left">Telepon</th>
+                        <th class="py-3 px-4 text-left">Email</th>
+                        <th class="py-3 px-4 text-center">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($guardians as $walis)
+                        <tr class="border-t hover:bg-gray-50 transition">
+                            <td class="py-3 px-4 text-gray-700 font-medium">{{ $loop->iteration }}</td>
+                            <td class="py-3 px-4 font-semibold text-gray-900">{{ $walis->name }}</td>
+                            <td class="py-3 px-4">{{ $walis->job }}</td>
+                            <td class="py-3 px-4">{{ $walis->phone }}</td>
+                            <td class="py-3 px-4">{{ $walis->email }}</td>
+                            <td class="py-3 px-4 text-center">
+                                <div class="flex justify-center space-x-2">
+                                    <a href="{{ route('guardians.edit', $walis->id) }}"
+                                       class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm font-medium shadow-sm transition">
+                                        Edit
+                                    </a>
+                                    <form action="{{ route('guardians.destroy', $walis->id) }}" 
+                                          method="POST" 
+                                          onsubmit="return confirm('Yakin ingin hapus data ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                                class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm font-medium shadow-sm transition">
+                                            Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </x-admin.layout>
