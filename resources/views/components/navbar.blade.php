@@ -26,14 +26,14 @@
                             <x-nav-link href="/wali" :active="request()->is('wali')">
                                 guardian
                             </x-nav-link>
-                            <x-nav-link href="/classroom" :active="request()->is('classroom')">
+                            <x-nav-link href="/classroom" :active="request()->is('classrooms')">
                                 classroom
                             </x-nav-link>
 
                             <x-nav-link href="/teacher" :active="request()->is('teacher')">
                                 guru
                             </x-nav-link>
-                            <x-nav-link href="/subject" :active="request()->is('subject')">
+                            <x-nav-link href="/subject" :active="request()->is('subjects')">
                                 subject
                             </x-nav-link>
 

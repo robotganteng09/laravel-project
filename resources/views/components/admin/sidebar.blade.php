@@ -36,6 +36,16 @@
                     <span>Teacher</span>
                 </x-admin.sidelink>
             </li>
+            <li>
+                <x-admin.sidelink :href="route('classroom.index')" :active="request()->routeIs('classroom.index')">
+                    <span>classroom</span>
+                </x-admin.sidelink>
+            </li>
+            <li>
+                <x-admin.sidelink :href="route('subject.index')" :active="request()->routeIs('subject.index')">
+                    <span>Subjet</span>
+                </x-admin.sidelink>
+            </li>
 
 
             {{-- Teachers --}}

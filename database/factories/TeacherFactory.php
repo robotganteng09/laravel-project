@@ -18,8 +18,8 @@ class TeacherFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'subject_id' => Subject::factory(),
+            'name' => $this->faker->name(), //membuat nama lengkap tapi palsu yang acak
+            'subject_id' => Subject::factory(), //membuat data yang di ambil dari subject factory
             'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->unique()->safeEmail(),
             'address' => $this->faker->address()

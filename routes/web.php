@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClassroomAdminController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GuardianAdminController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\profileController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\StudentAdminController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectAdminController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherAdminController;
 use App\Http\Controllers\TeacherController;
@@ -27,12 +29,14 @@ Route::get('/student', [StudentController::class, 'index',]);
 
 Route::get('/wali', [GuardianController::class, 'index',]);
 
-Route::get('/classroom', [ClassroomController::class, 'index',]);
+Route::get('/classrooms', [ClassroomController::class, 'index',]);
 Route::get('/teacher', [TeacherController::class, 'index',]);
-Route::get('/subject', [SubjectController::class, 'index',]);
+Route::get('/subjects', [SubjectController::class, 'index',]);
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard');
-Route::resource('students', StudentAdminController::class);
+Route::resource('students', StudentAdminController::class); //diambil dari nama folder
 Route::resource('guardians', GuardianAdminController::class);
 Route::resource('teachers', TeacherAdminController::class);
+Route::resource('classroom', ClassroomAdminController::class);
+Route::resource('subject', SubjectAdminController::class);

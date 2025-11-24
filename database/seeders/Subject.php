@@ -14,6 +14,6 @@ class Subject extends Seeder
      */
     public function run(): void
     {
-        ModelsSubject::factory(5)->has(Teacher::factory(1))->create();
+        ModelsSubject::factory(5)->has(Teacher::factory(1))->create(); //akan mengambil data dari teacher factory untuk diurutkan di Model Subject
     }
 }

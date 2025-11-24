@@ -45,7 +45,7 @@ class StudentAdminController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:students,email,' . $student->id,
+            'email' => 'required|email|unique:students,email,' . $student->id, //berfungsi untuk mengabaikan (exclude) email milik siswa yang sedang diedit
             'classroom_id' => 'required|integer',
             'alamat' => 'required|string|max:255',
             'birthday' => 'required|date',

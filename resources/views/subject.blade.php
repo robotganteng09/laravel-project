@@ -25,7 +25,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($subject as $pelajaran)
+            @foreach ($subjects as $pelajaran)
             <tr>
                 <td>{{ $loop -> iteration }}</td>
                 <td>{{ $pelajaran['name'] }}</td>
