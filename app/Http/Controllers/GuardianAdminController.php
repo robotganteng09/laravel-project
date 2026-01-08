@@ -1,0 +1,68 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Guardian;
+use Illuminate\Http\Request;
+
+class GuardianAdminController extends Controller
+{
+    public function index(){
+        $guardians = Guardian::all();
+
+        // Kirim data ke view
+        return view('guardians.index', compact('guardians'));
+    }
+
+    public function create()
+    {
+        return view('guardians.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name'  => 'required|string|max:255',
+            'job'   => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|email|unique:guardians,email',
+        ]);
+
+        Guardian::create($validated);
+
+        return redirect()->route('guardians.index')
+            ->with('success', 'Data wali berhasil ditambahkan!');
+    }
+
+    public function edit($id)
+    {
+        $guardian = Guardian::findOrFail($id);
+        return view('guardians.edit', compact('guardian'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $guardian = Guardian::findOrFail($id);
+
+        $validated = $request->validate([
+            'name'  => 'required|string|max:255',
+            'job'   => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|email|unique:guardians,email,' . $guardian->id,
+        ]);
+
+        $guardian->update($validated);
+
+        return redirect()->route('guardians.index')
+            ->with('success', 'Data wali berhasil diperbarui!');
+    }
+
+    public function destroy($id)
+    {
+        $guardian = Guardian::findOrFail($id);
+        $guardian->delete();
+
+        return redirect()->route('guardians.index')
+            ->with('success', 'Data wali berhasil dihapus!');
+    }
+}
