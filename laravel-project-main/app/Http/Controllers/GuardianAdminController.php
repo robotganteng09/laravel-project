@@ -17,7 +17,7 @@ class GuardianAdminController extends Controller
                 ->orWhere('email', 'like', "%{$search}%");
         })->get();
 
-        return view('guardians.index', compact('guardians', 'search'));
+        return view('guardians.index', compact('guardians', 'search')); //
     }
 
     public function create()
