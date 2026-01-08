@@ -7,7 +7,7 @@ use App\Http\Controllers\GuardianAdminController;
 use App\Http\Controllers\GuardianController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfilController;
-use App\Http\Controllers\profileController;
+
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\StudentAdminController;
 use App\Http\Controllers\StudentController;
