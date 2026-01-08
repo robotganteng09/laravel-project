@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 
 class SubjectAdminController extends Controller
 {
-   public function index(){
-    $subject = Subject::all();
-    return view('subject.index', compact('subject'));
+   public function index(Request $request){
+        $search = $request->search;
+
+        $subjects = Subject::when($search, function ($query) use ($search) {
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%");
+        })->paginate(10);
+
+        return view('subject.index', compact('subjects', 'search'));
    }
 
     public function create()

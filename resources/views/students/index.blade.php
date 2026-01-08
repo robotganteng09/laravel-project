@@ -1,6 +1,31 @@
 <x-admin.layout>
     <div class="p-6">
 
+        <div class="mb-4 flex justify-between items-center">
+    <form action="{{ route('students.index') }}" method="GET" class="flex gap-2">
+        <input
+            type="text"
+            name="search"
+            placeholder="Cari wali (nama, job, telp, email)..."
+            value="{{ request('search') }}"
+            class="border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+        <button
+            type="submit"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm shadow"
+        >
+            Search
+        </button>
+
+        @if(request('search'))
+            <a href="{{ route('students.index') }}"
+               class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm shadow">
+                Reset
+            </a>
+        @endif
+    </form>
+</div>
+       
         {{-- Header Section --}}
         <div
             class="flex flex-col md:flex-row items-center justify-between space-y-3
@@ -15,10 +40,8 @@
                bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300
                font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-500
                dark:hover:bg-green-600 focus:outline-none dark:focus:ring-green-800 transition">
-                <svg class="h-4 w-4 mr-2" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path clip-rule="evenodd" fill-rule="evenodd"
-                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110
+                <svg class="h-4 w-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110
                         2h-5v5a1 1 0 11-2 0v-5H4a1 1 0
                         110-2h5V4a1 1 0 011-1z" />
                 </svg>
@@ -66,7 +89,7 @@
                                     <a href="{{ route('students.edit', $student->id) }}"
                                         class="inline-flex items-center bg-blue-500 hover:bg-blue-600
                                                text-white px-3 py-1 rounded text-xs font-medium shadow-sm transition">
-                                       
+
                                         Edit
                                     </a>
 
@@ -78,7 +101,7 @@
                                         <button type="submit"
                                             class="inline-flex items-center bg-red-500 hover:bg-red-600
                                                    text-white px-3 py-1 rounded text-xs font-medium shadow-sm transition">
-                                          
+
                                             Hapus
                                         </button>
                                     </form>
@@ -88,6 +111,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="p-4">
+                {{ $students->appends(request()->query())->links() }}
+            </div>
         </div>
     </div>
 </x-admin.layout>

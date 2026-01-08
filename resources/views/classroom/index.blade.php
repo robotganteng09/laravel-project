@@ -1,4 +1,29 @@
 <x-admin.layout>
+    <div class="mb-4 flex justify-between items-center">
+    <form action="{{ route('classroom.index') }}" method="GET" class="flex gap-2">
+        <input
+            type="text"
+            name="search"
+            placeholder="Cari wali (nama, job, telp, email)..."
+            value="{{ request('search') }}"
+            class="border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+        <button
+            type="submit"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm shadow"
+        >
+            Search
+        </button>
+
+        @if(request('search'))
+            <a href="{{ route('classroom.index') }}"
+               class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm shadow">
+                Reset
+            </a>
+        @endif
+    </form>
+</div>
+
     <div class="p-6">
         <div class="flex justify-between items-center mb-4">
             <h1 class="text-2xl font-bold">Daftar Classroom</h1>
@@ -25,7 +50,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($classrooms as $kelas)
+                    @foreach ($classroom as $kelas)
                         <tr class="border-t hover:bg-gray-50 transition">
                             <td class="py-3 px-4 text-gray-700 font-medium">{{ $loop->iteration }}</td>
 
@@ -48,6 +73,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="p-4">
+                {{ $classroom->appends(request()->query())->links() }}
+            </div>
         </div>
     </div>
 </x-admin.layout>

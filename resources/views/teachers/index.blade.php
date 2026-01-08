@@ -1,4 +1,24 @@
 <x-admin.layout>
+    
+        <div class="mb-4 flex justify-between items-center">
+        <form action="{{ route('teachers.index') }}" method="GET" class="flex gap-2">
+            <input type="text" name="search" placeholder="Cari wali (nama, job, telp, email)..."
+                value="{{ request('search') }}"
+                class="border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm shadow">
+                Search
+            </button>
+
+            @if (request('search'))
+                <a href="{{ route('teachers.index') }}"
+                    class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm shadow">
+                    Reset
+                </a>
+            @endif
+        </form>
+    </div>
+
+
     <div class="p-6">
         <div class="flex justify-between items-center mb-4">
             <h1 class="text-2xl font-bold">Daftar Wali</h1>
@@ -61,6 +81,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="p-4">
+                {{ $teachers->appends(request()->query())->links() }}
+            </div>
         </div>
     </div>
 </x-admin.layout>

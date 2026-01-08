@@ -8,10 +8,18 @@ use Illuminate\Http\Request;
 
 class TeacherAdminController extends Controller
 {
-    public function index(){
-        $teachers = Teacher::all();
+    public function index(Request $request)
+    {
+        $search = $request->search;
 
-        return view('teachers.index',compact('teachers'));
+        $teachers = Teacher::when($search, function ($query) use ($search) {
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%")
+                ->orWhere('phone', 'like', "%{$search}%")
+                ->orWhere('address', 'like', "%{$search}%");
+        })->paginate(4);
+
+        return view('teachers.index', compact('teachers', 'search'));
     }
 
     public function create(){

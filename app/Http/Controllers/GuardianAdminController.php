@@ -7,11 +7,17 @@ use Illuminate\Http\Request;
 
 class GuardianAdminController extends Controller
 {
-    public function index(){
-        $guardians = Guardian::all();
+    public function index(Request $request){
+        $search = $request->search;
 
-        // Kirim data ke view
-        return view('guardians.index', compact('guardians'));
+        $guardians = Guardian::when($search, function ($query) use ($search) {
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhere('job', 'like', "%{$search}%")
+                ->orWhere('phone', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%");
+        })->paginate(5);
+
+        return view('guardians.index', compact('guardians', 'search'));
     }
 
     public function create()

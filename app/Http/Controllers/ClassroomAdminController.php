@@ -7,10 +7,17 @@ use Illuminate\Http\Request;
 
 class ClassroomAdminController extends Controller
 {
-    public function index(){
-        $classrooms = Classroom::all();
-        return view('classroom.index', compact('classrooms')); 
+    public function index(Request $request){
+   
+        $search = $request->search;
+
+        $classroom = Classroom::when($search, function ($query) use ($search) {
+            $query->where('name', 'like', "%{$search}%");
+        })->paginate(5);
+
+        return view('classroom.index', compact('classroom', 'search'));
     }
+    
 
     public function create()
     {

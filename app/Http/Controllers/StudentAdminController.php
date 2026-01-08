@@ -8,11 +8,19 @@ use Illuminate\Http\Request;
 
 class StudentAdminController extends Controller
 {
-    public function index(){
-        $students = Student::with('classroom')->get();
+    public function index(Request $request){
+        $search = $request->search;
 
-        // Kirim ke view
-        return view('students.index', compact('students'));
+        $students =  Student::when($search, function ($query) use ($search) {
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%")
+                ->orWhere('classroom_id', 'like', "%{$search}%")
+                ->orWhere('alamat', 'like', "%{$search}%")
+                ->orWhere('birthday', 'like', "%{$search}%")
+                ->orWhere('gender', 'like', "%{$search}%");
+        })->paginate(10);
+
+        return view('students.index', compact('students', 'search'));
     }
 
     public function create()
