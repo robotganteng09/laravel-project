@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 
 class StudentSeeder extends Seeder
 {
+    //login
     /**
      * Run the database seeds.
      */
