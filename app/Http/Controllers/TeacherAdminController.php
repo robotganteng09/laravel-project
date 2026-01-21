@@ -12,12 +12,18 @@ class TeacherAdminController extends Controller
     {
         $search = $request->search;
 
-        $teachers = Teacher::when($search, function ($query) use ($search) {
-            $query->where('name', 'like', "%{$search}%")
-                ->orWhere('email', 'like', "%{$search}%")
-                ->orWhere('phone', 'like', "%{$search}%")
-                ->orWhere('address', 'like', "%{$search}%");
-        })->paginate(4);
+        $teachers = Teacher::with('subject')
+            ->when($search, function ($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('phone', 'like', "%{$search}%")
+                    ->orWhere('address', 'like', "%{$search}%")
+                    ->orWhereHas('subject', function ($q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%");
+                    });
+            })
+            ->paginate(4)
+            ->withQueryString();
 
         return view('teachers.index', compact('teachers', 'search'));
     }

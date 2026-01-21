@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomAdminController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\ContactController;
@@ -18,12 +19,15 @@ use App\Http\Controllers\TeacherController;
 use App\View\Components\admin\admin;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/profile', [ProfilController::class, 'profil']);
 
 Route::get('/kontak', [ContactController::class, 'contact',]);
 
-Route::get('/home', [HomeController::class,'index']);
+Route::get('/home', [HomeController::class, 'index']);
 
 Route::get('/student', [StudentController::class, 'index',]);
 
@@ -40,3 +44,19 @@ Route::resource('guardians', GuardianAdminController::class);
 Route::resource('teachers', TeacherAdminController::class);
 Route::resource('classroom', ClassroomAdminController::class);
 Route::resource('subject', SubjectAdminController::class);
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/profile', [ProfilController::class, 'profil']);
+    Route::get('/kontak', [ContactController::class, 'contact']);
+
+    Route::get('/student', [StudentController::class, 'index']);
+    Route::get('/wali', [GuardianController::class, 'index']);
+    Route::get('/classrooms', [ClassroomController::class, 'index']);
+    Route::get('/teacher', [TeacherController::class, 'index']);
+    Route::get('/subjects', [SubjectController::class, 'index']);
+
+
+});
