@@ -19,6 +19,10 @@ use App\Http\Controllers\TeacherController;
 use App\View\Components\admin\admin;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return redirect()->route('login');
+});
+
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 
@@ -36,27 +40,33 @@ Route::get('/wali', [GuardianController::class, 'index',]);
 Route::get('/classrooms', [ClassroomController::class, 'index',]);
 Route::get('/teacher', [TeacherController::class, 'index',]);
 Route::get('/subjects', [SubjectController::class, 'index',]);
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->name('admin.dashboard');
-Route::resource('students', StudentAdminController::class); //diambil dari nama folder
-Route::resource('guardians', GuardianAdminController::class);
-Route::resource('teachers', TeacherAdminController::class);
-Route::resource('classroom', ClassroomAdminController::class);
-Route::resource('subject', SubjectAdminController::class);
+// Route::get('/dashboard', function () {
+//     return view('admin.dashboard');
+// })->name('admin.dashboard');
+// Route::resource('students', StudentAdminController::class); //diambil dari nama folder
+// Route::resource('guardians', GuardianAdminController::class);
+// Route::resource('teachers', TeacherAdminController::class);
+// Route::resource('classroom', ClassroomAdminController::class);
+// Route::resource('subject', SubjectAdminController::class);
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
 
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('dashboard');
 
-    Route::get('/profile', [ProfilController::class, 'profil']);
-    Route::get('/kontak', [ContactController::class, 'contact']);
-
-    Route::get('/student', [StudentController::class, 'index']);
-    Route::get('/wali', [GuardianController::class, 'index']);
-    Route::get('/classrooms', [ClassroomController::class, 'index']);
-    Route::get('/teacher', [TeacherController::class, 'index']);
-    Route::get('/subjects', [SubjectController::class, 'index']);
+        Route::resource('students', StudentAdminController::class);
+        Route::resource('guardians', GuardianAdminController::class);
+        Route::resource('teachers', TeacherAdminController::class);
+        Route::resource('classrooms', ClassroomAdminController::class);
+        Route::resource('subjects', SubjectAdminController::class);
+    });
 
 
+Route::middleware('guest')->group(function () {
+    Route::get('/', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 });

@@ -10,42 +10,59 @@
                 class="w-8 inline-block mr-2">
             Admin Dashboard
         </div>
+  {{-- Dashboard --}}
+    <li>
+        <x-admin.sidelink
+            :href="route('admin.dashboard')"
+            :active="request()->routeIs('admin.dashboard')">
+            <span>Dashboard</span>
+        </x-admin.sidelink>
+    </li>
 
-        <ul class="space-y-2 font-medium">
-            {{-- Dashboard --}}
-            <li>
-                <x-admin.sidelink :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                    <span>Dashboard</span>
-                </x-admin.sidelink>
+    {{-- Students --}}
+    <li>
+        <x-admin.sidelink
+            :href="route('admin.students.index')"
+            :active="request()->routeIs('admin.students.*')">
+            <span>Students</span>
+        </x-admin.sidelink>
+    </li>
 
-            </li>
+    {{-- Guardians --}}
+    <li>
+        <x-admin.sidelink
+            :href="route('admin.guardians.index')"
+            :active="request()->routeIs('admin.guardians.*')">
+            <span>Walmur</span>
+        </x-admin.sidelink>
+    </li>
 
-            {{-- Students --}}
-            <li>
-                <x-admin.sidelink :href="route('students.index')" :active="request()->routeIs('students.index')">
-                    <span>Students</span>
-                </x-admin.sidelink>
-            </li>
-            <li>
-                <x-admin.sidelink :href="route('guardians.index')" :active="request()->routeIs('guardians.index')">
-                    <span>Walmur</span>
-                </x-admin.sidelink>
-            </li>
-            <li>
-                <x-admin.sidelink :href="route('teachers.index')" :active="request()->routeIs('teachers.index')">
-                    <span>Teacher</span>
-                </x-admin.sidelink>
-            </li>
-            <li>
-                <x-admin.sidelink :href="route('classroom.index')" :active="request()->routeIs('classroom.index')">
-                    <span>classroom</span>
-                </x-admin.sidelink>
-            </li>
-            <li>
-                <x-admin.sidelink :href="route('subject.index')" :active="request()->routeIs('subject.index')">
-                    <span>Subjet</span>
-                </x-admin.sidelink>
-            </li>
+    {{-- Teachers --}}
+    <li>
+        <x-admin.sidelink
+            :href="route('admin.teachers.index')"
+            :active="request()->routeIs('admin.teachers.*')">
+            <span>Teacher</span>
+        </x-admin.sidelink>
+    </li>
+
+    {{-- Classrooms --}}
+    <li>
+        <x-admin.sidelink
+            :href="route('admin.classrooms.index')"
+            :active="request()->routeIs('admin.classrooms.*')">
+            <span>Classroom</span>
+        </x-admin.sidelink>
+    </li>
+
+    {{-- Subjects --}}
+    <li>
+        <x-admin.sidelink
+            :href="route('admin.subjects.index')"
+            :active="request()->routeIs('admin.subjects.*')">
+            <span>Subject</span>
+        </x-admin.sidelink>
+    </li> 
 
 
             {{-- Teachers --}}
