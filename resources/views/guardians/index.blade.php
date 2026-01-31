@@ -1,7 +1,7 @@
 <x-admin.layout>
 
     <div class="mb-4 flex justify-between items-center">
-        <form action="{{ route('guardians.index') }}" method="GET" class="flex gap-2">
+        <form action="{{ route('admin.guardians.index') }}" method="GET" class="flex gap-2">
             <input type="text" name="search" placeholder="Cari wali (nama, job, telp, email)..."
                 value="{{ request('search') }}"
                 class="border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -10,7 +10,7 @@
             </button>
 
             @if (request('search'))
-                <a href="{{ route('guardians.index') }}"
+                <a href="{{ route('admin.guardians.index') }}"
                     class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm shadow">
                     Reset
                 </a>
@@ -21,7 +21,7 @@
     <div class="p-6">
         <div class="flex justify-between items-center mb-4">
             <h1 class="text-2xl font-bold">Daftar Wali</h1>
-            <a href="{{ route('guardians.create') }}"
+            <a href="{{ route('admin.guardians.create') }}"
                 class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow-md flex items-center space-x-1">
                 <span>+ Tambah Wali</span>
             </a>
@@ -55,11 +55,11 @@
                             <td class="py-3 px-4">{{ $walis->email }}</td>
                             <td class="py-3 px-4 text-center">
                                 <div class="flex justify-center space-x-2">
-                                    <a href="{{ route('guardians.edit', $walis->id) }}"
+                                    <a href="{{ route('admin.guardians.edit', $walis->id) }}"
                                         class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm font-medium shadow-sm transition">
                                         Edit
                                     </a>
-                                    <form action="{{ route('guardians.destroy', $walis->id) }}" method="POST"
+                                    <form action="{{ route('admin.guardians.destroy', $walis->id) }}" method="POST"
                                         onsubmit="return confirm('Yakin ingin hapus data ini?')">
                                         @csrf
                                         @method('DELETE')

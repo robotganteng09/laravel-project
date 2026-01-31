@@ -2,7 +2,7 @@
     <div class="p-6 bg-white rounded-lg shadow-md">
         <h2 class="text-2xl font-bold mb-4 text-gray-800">Tambah Guru</h2>
 
-        <form action="{{ route('teachers.store') }}" method="POST" class="space-y-4">
+        <form action="{{ route('admin.teachers.store') }}" method="POST" class="space-y-4">
             @csrf
 
             {{-- Nama --}}
@@ -53,7 +53,7 @@
 
             {{-- Tombol --}}
             <div class="flex justify-end space-x-2 mt-4">
-                <a href="{{ route('teachers.index') }}" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400">Batal</a>
+                <a href="{{ route('admin.teachers.index') }}" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400">Batal</a>
                 <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Simpan</button>
             </div>
         </form>

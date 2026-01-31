@@ -2,7 +2,7 @@
     <div class="p-6">
         <h1 class="text-xl font-bold mb-4">Tambah Mata Pelajaran</h1>
 
-        <form action="{{ route('subject.store') }}" method="POST">
+        <form action="{{ route('admin.subjects.store') }}" method="POST">
             @csrf
 
             <div class="grid grid-cols-2 gap-4">

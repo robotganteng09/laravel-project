@@ -2,7 +2,7 @@
     <div class="p-6">
         <h1 class="text-xl font-bold mb-4">Tambah Classroom</h1>
 
-        <form action="{{ route('classroom.store') }}" method="POST">
+        <form action="{{ route('admin.classrooms.store') }}" method="POST">
             @csrf
 
             <div class="grid grid-cols-2 gap-4">
@@ -28,7 +28,7 @@
                 </button>
 
                 <a 
-                    href="{{ route('classroom.index') }}" 
+                    href="{{ route('admin.classrooms.index') }}" 
                     class="ml-2 bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded"
                 >
                     Batal

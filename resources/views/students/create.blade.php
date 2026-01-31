@@ -2,7 +2,7 @@
     <div class="p-6">
         <h1 class="text-xl font-bold mb-4">Tambah Siswa</h1>
 
-        <form action="{{ route('students.store') }}" method="POST">
+        <form action="{{ route('admin.students.store') }}" method="POST">
             @csrf
             <div class="grid grid-cols-2 gap-4">
                 <div>

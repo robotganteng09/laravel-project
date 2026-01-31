@@ -1,6 +1,6 @@
 <x-admin.layout>
     <div class="mb-4 flex justify-between items-center">
-    <form action="{{ route('subject.index') }}" method="GET" class="flex gap-2">
+    <form action="{{ route('admin.subjects.index') }}" method="GET" class="flex gap-2">
         <input
             type="text"
             name="search"
@@ -16,7 +16,7 @@
         </button>
 
         @if(request('search'))
-            <a href="{{ route('subject.index') }}"
+            <a href="{{ route('admin.subject.index') }}"
                class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm shadow">
                 Reset
             </a>
@@ -27,7 +27,7 @@
     <div class="p-6">
         <div class="flex justify-between items-center mb-4">
             <h1 class="text-2xl font-bold">Daftar Mata Pelajaran</h1>
-            <a href="{{ route('subject.create') }}" 
+            <a href="{{ route('admin.subjects.create') }}" 
                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow-md flex items-center space-x-1">
                 <span>+ Tambah Mata Pelajaran</span>
             </a>
@@ -67,7 +67,7 @@
 
                             <td class="py-3 px-4 text-center">
                                 <div class="flex justify-center space-x-2">
-                                    <a href="{{ route('subject.edit', $mapel->id) }}"
+                                    <a href="{{ route('admin.subjects.edit', $mapel->id) }}"
                                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm font-medium shadow-sm transition">
                                         Edit
                                     </a>

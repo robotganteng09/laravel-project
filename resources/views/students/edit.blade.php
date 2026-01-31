@@ -2,7 +2,7 @@
     <div class="p-6">
         <h1 class="text-xl font-bold mb-4">Edit Data Siswa</h1>
 
-        <form action="{{ route('students.update', $student->id) }}" method="POST">
+        <form action="{{ route('admin.students.update', $student->id) }}" method="POST">
             @csrf
             @method('PUT')
 

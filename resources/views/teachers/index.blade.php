@@ -1,6 +1,6 @@
 <x-admin.layout>
     
-   <form method="GET" action="{{ route('teachers.index') }}">
+   <form method="GET" action="{{ route('admin.teachers.index') }}">
     <input type="text"
            name="search"
            placeholder="Cari guru atau pelajaran..."
@@ -12,7 +12,7 @@
     <div class="p-6">
         <div class="flex justify-between items-center mb-4">
             <h1 class="text-2xl font-bold">Daftar Wali</h1>
-            <a href="{{ route('teachers.create') }}" 
+            <a href="{{ route('admin.teachers.create') }}" 
                class="flex items-center justify-center text-white
                bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300
                font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-500
@@ -51,11 +51,11 @@
                             <td class="py-3 px-4">{{ $guru->address }}</td>
                             <td class="py-3 px-4 text-center">
                                 <div class="flex justify-center space-x-2">
-                                    <a href="{{ route('teachers.edit', $guru->id) }}"
+                                    <a href="{{ route('admin.teachers.edit', $guru->id) }}"
                                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm font-medium shadow-sm">
                                         Edit
                                     </a>
-                                    <form action="{{ route('teachers.destroy', $guru->id) }}"
+                                    <form action="{{ route('admin.teachers.destroy', $guru->id) }}"
                                           method="POST"
                                           onsubmit="return confirm('Yakin ingin hapus data ini?')">
                                         @csrf

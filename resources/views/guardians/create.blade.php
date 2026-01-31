@@ -2,7 +2,7 @@
     <div class="p-6">
         <h1 class="text-xl font-bold mb-4">Tambah Wali</h1>
 
-        <form action="{{ route('guardians.store') }}" method="POST">
+        <form action="{{ route('admin.guardians.store') }}" method="POST">
             @csrf
             <div class="grid grid-cols-2 gap-4">
                 <div>
@@ -59,7 +59,7 @@
                 </button>
 
                 <a 
-                    href="{{ route('guardians.index') }}" 
+                    href="{{ route('admin.guardian.index') }}" 
                     class="ml-2 bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded"
                 >
                     Batal

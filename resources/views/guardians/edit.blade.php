@@ -2,7 +2,7 @@
     <div class="p-6">
         <h1 class="text-xl font-bold mb-4">Edit Data Wali</h1>
 
-        <form action="{{ route('guardians.update', $guardian->id) }}" method="POST">
+        <form action="{{ route('admin.guardians.update', $guardian->id) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -65,7 +65,7 @@
                 </button>
 
                 <a 
-                    href="{{ route('guardians.index') }}" 
+                    href="{{ route('admin.guardians.index') }}" 
                     class="ml-2 bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded"
                 >
                     Batal

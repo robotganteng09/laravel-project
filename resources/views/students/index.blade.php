@@ -2,7 +2,7 @@
     <div class="p-6">
 
         <div class="mb-4 flex justify-between items-center">
-    <form action="{{ route('students.index') }}" method="GET" class="flex gap-2">
+    <form action="{{ route('admin.students.index') }}" method="GET" class="flex gap-2">
         <input
             type="text"
             name="search"
@@ -18,7 +18,7 @@
         </button>
 
         @if(request('search'))
-            <a href="{{ route('students.index') }}"
+            <a href="{{ route('admin.students.index') }}"
                class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm shadow">
                 Reset
             </a>
@@ -35,7 +35,7 @@
             </h1>
 
             {{-- Tombol Tambah --}}
-            <a href="{{ route('students.create') }}"
+            <a href="{{ route('admin.students.create') }}"
                 class="flex items-center justify-center text-white
                bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300
                font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-500
@@ -86,7 +86,7 @@
                             <td class="px-6 py-4 text-center">
                                 <div class="flex justify-center items-center space-x-2">
                                     {{-- Tombol Edit --}}
-                                    <a href="{{ route('students.edit', $student->id) }}"
+                                    <a href="{{ route('admin.students.edit', $student->id) }}"
                                         class="inline-flex items-center bg-blue-500 hover:bg-blue-600
                                                text-white px-3 py-1 rounded text-xs font-medium shadow-sm transition">
 
@@ -94,7 +94,7 @@
                                     </a>
 
                                     {{-- Tombol Hapus --}}
-                                    <form action="{{ route('students.destroy', $student->id) }}" method="POST"
+                                    <form action="{{ route('admin.students.destroy', $student->id) }}" method="POST"
                                         onsubmit="return confirm('Yakin ingin hapus data ini?')" class="inline-flex">
                                         @csrf
                                         @method('DELETE')
